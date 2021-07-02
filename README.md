@@ -19,6 +19,11 @@
 
 <br>
 
-# Yelp Camp
+## Packages Used
 
->
+- `Express` - Fast, unopinionated, minimalist web framework for Node.js
+- `EJS` - HTML template engine
+- `es-mate` - EJS boilerplate layout engine
+- `method-override` - Lets you use HTTP verbs such as PUT or DELETE in places where the client doesn't support it.
+- `mongoose` - MongoDB framework for Express
+- `morgan` - HTTP request logger middleware for Node.js
