@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const morgan = require('morgan')
 const ejsMate = require('ejs-mate')
 const methodOverride = require('method-override')
+const AppError = require('./AppError')
 
 const Campground = require('./models/campground')
 
@@ -74,6 +75,11 @@ app.delete('/campgrounds/:id', async (req, res) => {
   const { id } = req.params
   const campground = await Campground.findByIdAndRemove(id)
   res.redirect('/campgrounds')
+})
+
+app.use((err, req, res, next) => {
+  const { status = 500, message = 'Something went wrong' } = err
+  res.status(status).send(message)
 })
 
 app.listen(3000, () => {

@@ -5,6 +5,8 @@
     <form
       action="/campgrounds/<%= campground._id %>/?_method=PUT"
       method="POST"
+      class="validated-form"
+      novalidate
     >
       <div class="form-floating mb-3">
         <input
@@ -14,8 +16,10 @@
           name="campground[title]"
           placeholder="Campground Title"
           value="<%= campground.title%>"
+          required
         />
         <label class="form-label" for="title">Title</label>
+        <div class="valid-feedback">Looks good!</div>
       </div>
       <div class="form-floating mb-3">
         <input
@@ -25,8 +29,10 @@
           name="campground[location]"
           placeholder="Campground Location"
           value="<%= campground.location%>"
+          required
         />
         <label for="location">Location</label>
+        <div class="valid-feedback">Looks good!</div>
       </div>
       <div class="form-floating mb-3">
         <input
@@ -36,8 +42,10 @@
           name="campground[image]"
           placeholder="Campground Image URL"
           value="<%= campground.image%>"
+          required
         />
         <label for="location">Image URL</label>
+        <div class="valid-feedback">Looks good!</div>
       </div>
       <div class="form-floating mb-3">
         <input
@@ -47,9 +55,11 @@
           name="campground[price]"
           placeholder="Price ($)"
           value="<%= campground.price%>"
+          required
         />
         <label for="price">Price ($)</label>
         <div id="emailHelp" class="form-text">Prices are in US Dollars.</div>
+        <div class="valid-feedback">Looks good!</div>
       </div>
       <div class="form-floating mb-3">
         <textarea
@@ -59,10 +69,12 @@
           name="campground[description]"
           placeholder="Campground Description"
           style="height: 100px"
+          required
         >
 <%= campground.description%>
         </textarea>
         <label for="location">Description</label>
+        <div class="valid-feedback">Looks good!</div>
       </div>
       <div class="mb-3">
         <button class="btn btn-success">Save</button>

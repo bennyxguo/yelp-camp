@@ -2,7 +2,7 @@
 <div class="row">
   <h1 class="text-center mb-5">New Campground</h1>
   <div class="col-6 offset-3">
-    <form action="/campgrounds" method="POST">
+    <form action="/campgrounds" method="POST" class="validated-form" novalidate>
       <div class="form-floating mb-3">
         <input
           class="form-control"
@@ -10,8 +10,10 @@
           id="title"
           name="campground[title]"
           placeholder="Campground Title"
+          required
         />
         <label class="form-label" for="title">Title</label>
+        <div class="valid-feedback">Looks good!</div>
       </div>
       <div class="form-floating mb-3">
         <input
@@ -20,8 +22,10 @@
           id="location"
           name="campground[location]"
           placeholder="Campground Location"
+          required
         />
         <label for="location">Location</label>
+        <div class="valid-feedback">Looks good!</div>
       </div>
       <div class="form-floating mb-3">
         <input
@@ -30,8 +34,10 @@
           id="image"
           name="campground[image]"
           placeholder="Campground Image URL"
+          required
         />
         <label for="location">Image URL</label>
+        <div class="valid-feedback">Looks good!</div>
       </div>
       <div class="form-floating mb-3">
         <input
@@ -40,9 +46,11 @@
           class="form-control"
           name="campground[price]"
           placeholder="Price ($)"
+          required
         />
         <label for="price">Price ($)</label>
         <div id="emailHelp" class="form-text">Prices are in US Dollars.</div>
+        <div class="valid-feedback">Looks good!</div>
       </div>
       <div class="form-floating mb-3">
         <textarea
@@ -52,8 +60,10 @@
           name="campground[description]"
           placeholder="Campground Description"
           style="height: 100px"
+          required
         ></textarea>
         <label for="location">Description</label>
+        <div class="valid-feedback">Looks good!</div>
       </div>
       <div class="mb-3">
         <button class="btn btn-success">Submit</button>
