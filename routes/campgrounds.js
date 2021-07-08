@@ -4,6 +4,7 @@ const catchAsync = require('../utils/catchAsync')
 const ExpressError = require('../utils/ExpressError')
 const Campground = require('../models/campground')
 const { campgroundSchema } = require('../schemas.js')
+const { auth } = require('../middlewares/auths')
 
 const validateCampground = (req, res, next) => {
   const { error } = campgroundSchema.validate(req.body)
@@ -24,12 +25,13 @@ router.get(
   })
 )
 
-router.get('/campgrounds/new', (req, res) => {
+router.get('/new', auth, (req, res) => {
   res.render('campgrounds/new')
 })
 
 router.post(
   '/',
+  auth,
   validateCampground,
   catchAsync(async (req, res) => {
     const campground = new Campground(req.body.campground)
@@ -47,7 +49,7 @@ router.get(
     )
     if (!campground) {
       req.flash('error', 'Cannot find that campground')
-      res.redirect('/campgrounds')
+      return res.redirect('/campgrounds')
     }
     res.render('campgrounds/show', { campground })
   })
@@ -55,11 +57,12 @@ router.get(
 
 router.get(
   '/:id/edit',
+  auth,
   catchAsync(async (req, res) => {
     const campground = await Campground.findById(req.params.id)
     if (!campground) {
       req.flash('error', 'Cannot find that campground')
-      res.redirect('/campgrounds')
+      return res.redirect('/campgrounds')
     }
     res.render('campgrounds/edit', { campground })
   })
@@ -67,6 +70,7 @@ router.get(
 
 router.put(
   '/:id',
+  auth,
   validateCampground,
   catchAsync(async (req, res) => {
     const { id } = req.params
@@ -84,6 +88,7 @@ router.put(
 
 router.delete(
   '/:id',
+  auth,
   catchAsync(async (req, res) => {
     const { id } = req.params
     const campground = await Campground.findByIdAndDelete(id)

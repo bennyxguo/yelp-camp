@@ -5,12 +5,16 @@ const morgan = require('morgan')
 const ejsMate = require('ejs-mate')
 const session = require('express-session')
 const flash = require('connect-flash')
+const passport = require('passport')
+const LocalStrategy = require('passport-local')
+const User = require('./models/user')
 
 const methodOverride = require('method-override')
 const ExpressError = require('./utils/ExpressError')
 
 const campgroundsRoutes = require('./routes/campgrounds')
 const reviewsRoutes = require('./routes/reviews')
+const usersRoutes = require('./routes/users')
 
 mongoose.connect('mongodb://localhost:27017/yelp-camp', {
   useNewUrlParser: true,
@@ -51,19 +55,31 @@ const sessionConfig = {
 app.use(session(sessionConfig))
 app.use(flash())
 
+// Setting up Passport
+// `Passport` @see https://www.passportjs.org/docs/downloads/html/
+// `passport-local` @see https://www.passportjs.org/packages/passport-local/
+// `passport-local-mongoose` @see https://github.com/saintedlama/passport-local-mongoose
+app.use(passport.initialize())
+app.use(passport.session())
+passport.use(new LocalStrategy(User.authenticate()))
+passport.serializeUser(User.serializeUser())
+passport.deserializeUser(User.deserializeUser())
+
 app.use((req, res, next) => {
+  res.locals.authUser = req.user ?? null
   res.locals.success = req.flash('success')
   res.locals.error = req.flash('error')
   next()
 })
 
-// Routers
-app.use('/campgrounds', campgroundsRoutes)
-app.use('/campgrounds/:id/reviews', reviewsRoutes)
-
+// Registering Routers
 app.get('/', (req, res) => {
   res.render('home')
 })
+
+app.use('/', usersRoutes)
+app.use('/campgrounds', campgroundsRoutes)
+app.use('/campgrounds/:id/reviews', reviewsRoutes)
 
 // 404 Handler
 app.all('*', (req, res, next) => {
