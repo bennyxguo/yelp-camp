@@ -5,6 +5,7 @@ const Campground = require('../models/campground')
 
 const { auth } = require('../middlewares/auths')
 const { validateCampground, isAuthor } = require('../middlewares/campgrounds')
+const md5 = require('md5')
 
 router.get(
   '/',
@@ -35,12 +36,20 @@ router.get(
   '/:id',
   catchAsync(async (req, res) => {
     const campground = await Campground.findById(req.params.id)
-      .populate('reviews')
+      .populate({ path: 'reviews', populate: { path: 'author' } })
       .populate('author')
     if (!campground) {
       req.flash('error', 'Cannot find that campground')
       return res.redirect('/campgrounds')
     }
+    if (campground.reviews.length) {
+      campground.reviews = campground.reviews.map((review) => {
+        review.author.hash = md5(review.author.email.trim())
+        return review
+      })
+    }
+
+    // console.log(campground.reviews[0])
     res.render('campgrounds/show', { campground })
   })
 )
