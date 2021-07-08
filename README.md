@@ -27,3 +27,5 @@
 - `method-override` - Lets you use HTTP verbs such as PUT or DELETE in places where the client doesn't support it.
 - `mongoose` - MongoDB framework for Express
 - `morgan` - HTTP request logger middleware for Node.js
+- `express-session` - Simple session middleware for Express
+- `connect-flash` - A special area of the session used for storing messages.
