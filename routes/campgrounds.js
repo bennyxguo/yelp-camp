@@ -6,29 +6,24 @@ const CampgroundController = require('../controllers/campgrounds')
 const { auth } = require('../middlewares/auths')
 const { validateCampground, isAuthor } = require('../middlewares/campgrounds')
 
-router.get('/', catchAsync(CampgroundController.index))
+router
+  .route('/')
+  .get(catchAsync(CampgroundController.index))
+  .post(auth, validateCampground, catchAsync(CampgroundController.store))
 
 router.get('/new', auth, CampgroundController.create)
 
-router.post(
-  '/',
-  auth,
-  validateCampground,
-  catchAsync(CampgroundController.store)
-)
-
-router.get('/:id', catchAsync(CampgroundController.show))
+router
+  .route('/:id')
+  .get(catchAsync(CampgroundController.show))
+  .put(
+    auth,
+    isAuthor,
+    validateCampground,
+    catchAsync(CampgroundController.update)
+  )
+  .delete(auth, isAuthor, catchAsync(CampgroundController.destroy))
 
 router.get('/:id/edit', auth, isAuthor, catchAsync(CampgroundController.edit))
-
-router.put(
-  '/:id',
-  auth,
-  isAuthor,
-  validateCampground,
-  catchAsync(CampgroundController.update)
-)
-
-router.delete('/:id', auth, isAuthor, catchAsync(CampgroundController.destroy))
 
 module.exports = router
