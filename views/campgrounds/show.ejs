@@ -15,6 +15,7 @@
         <li class="list-group-item">$<%= campground.price %> per night</li>
       </ul>
       <div class="card-body">
+        <% if (authUser && campground.author.equals(authUser._id)) { %>
         <a
           href="/campgrounds/<%= campground._id%>/edit"
           class="btn btn-primary"
@@ -28,9 +29,13 @@
         >
           <button class="btn btn-danger">Delete</button>
         </form>
+        <% } %>
         <a href="/campgrounds" class="btn btn-light">Back to list</a>
       </div>
-      <div class="card-footer text-muted">2 days ago</div>
+      <div class="card-footer text-muted">
+        Submitted by
+        <b class="text-primary"><%= campground.author.username %></b> 2 days ago
+      </div>
     </div>
   </div>
   <div class="col-6">
