@@ -4,39 +4,18 @@ const express = require('express')
 // If not we will not able to access the campground :id
 const router = express.Router({ mergeParams: true })
 const catchAsync = require('../utils/catchAsync')
-const Review = require('../models/review')
-const Campground = require('../models/campground')
+const ReviewController = require('../controllers/reviews')
 
 const { auth } = require('../middlewares/auths')
 const { validateReview, isReivewAuthor } = require('../middlewares/reviews')
 
-router.post(
-  '/',
-  auth,
-  validateReview,
-  catchAsync(async (req, res) => {
-    const campground = await Campground.findById(req.params.id)
-    const review = new Review(req.body.review)
-    review.author = req.user._id
-    campground.reviews.push(review)
-    await review.save()
-    await campground.save()
-    req.flash('success', 'Created a new review!')
-    res.redirect(`/campgrounds/${campground._id}`)
-  })
-)
+router.post('/', auth, validateReview, catchAsync(ReviewController.store))
 
 router.delete(
   '/:reviewId',
   auth,
   isReivewAuthor,
-  catchAsync(async (req, res) => {
-    const { id, reviewId } = req.params
-    await Campground.findByIdAndUpdate(id, { $pull: { reviews: reviewId } })
-    await Review.findByIdAndDelete(reviewId)
-    req.flash('success', 'Successfully deleted a review!')
-    res.redirect(`/campgrounds/${id}`)
-  })
+  catchAsync(ReviewController.destroy)
 )
 
 module.exports = router
