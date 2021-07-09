@@ -1,5 +1,11 @@
 <% layout('layouts/boilerplate') %>
 
+<div class="row mb-3">
+  <div class="col-12">
+    <div id="map" style="width: 100%; height: 300px"></div>
+  </div>
+</div>
+
 <div class="row">
   <div class="col-md-6 col-sm-12">
     <div class="card">
@@ -195,3 +201,9 @@
     <% } %>
   </div>
 </div>
+
+<script>
+  const mapBoxToken = '<%- process.env.MAPBOX_TOKEN %>'
+  const campgroundData = <%- JSON.stringify(campground) %>
+</script>
+<script src="/js/mapbox.js"></script>

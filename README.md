@@ -29,3 +29,8 @@
 - `morgan` - HTTP request logger middleware for Node.js
 - `express-session` - Simple session middleware for Express
 - `connect-flash` - A special area of the session used for storing messages.
+
+## Features
+
+- Campground maps using [MapBox](https://mapbox.com)
+- Image hosting using [Cloudinary](https://cloudinary.com/)
