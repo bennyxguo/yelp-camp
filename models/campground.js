@@ -12,33 +12,45 @@ ImageSchema.virtual('thumbnail').get(function () {
   return this.url.replace('/upload', '/upload/w_100')
 })
 
-const CampgroundSchema = new Schema({
-  title: String,
-  images: [ImageSchema],
-  price: Number,
-  description: String,
-  location: String,
-  geometry: {
-    type: {
-      type: String,
-      enum: ['Point'],
-      require: true
+const opts = { toJSON: { virtuals: true } }
+
+const CampgroundSchema = new Schema(
+  {
+    title: String,
+    images: [ImageSchema],
+    price: Number,
+    description: String,
+    location: String,
+    geometry: {
+      type: {
+        type: String,
+        enum: ['Point'],
+        require: true
+      },
+      coordinates: {
+        type: [Number],
+        required: true
+      }
     },
-    coordinates: {
-      type: [Number],
-      required: true
-    }
-  },
-  author: {
-    type: Schema.Types.ObjectId,
-    ref: 'User'
-  },
-  reviews: [
-    {
+    author: {
       type: Schema.Types.ObjectId,
-      ref: 'Review'
-    }
-  ]
+      ref: 'User'
+    },
+    reviews: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Review'
+      }
+    ]
+  },
+  opts
+)
+
+CampgroundSchema.virtual('properties.popUpMarkup').get(function () {
+  return `
+    <strong><a href="/campgrounds/${this._id}">${this.title}</a></strong><br/>
+    <i class="bi bi-geo-alt"></i> ${this.location}
+  `
 })
 
 CampgroundSchema.post('findOneAndDelete', async function (doc) {

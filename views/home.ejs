@@ -1,2 +1,39 @@
-<% layout('layouts/boilerplate') %>
-<h1>HOME of YELP CAMP!!!</h1>
+<% layout('layouts/cover-layout') %>
+
+<link rel="stylesheet" href="/css/home.css">
+
+<header class="mb-auto">
+  <div>
+    <h3 class="float-md-start mb-0">⛺️ YelpCamp</h3>
+    <nav class="nav nav-masthead justify-content-center float-md-end">
+      <a class="nav-link active" aria-current="page" href="#">Home</a>
+      <a class="nav-link" href="/campgrounds">Campgrounds</a>
+      <% if (!authUser) { %>
+      <a class="nav-link" href="/login">Login</a>
+      <a class="nav-link" href="/register">Register</a>
+      <% } else { %>
+      <a class="nav-link" href="/logout">logout</a>
+      <% } %>
+    </nav>
+  </div>
+</header>
+
+<main class="px-3">
+  <h1 class="mb-3">Welcome to ⛺️ YelpCamp!</h1>
+  <p class="lead pb-4">
+    Jump right in and explore many community posted campgrounds. <br />
+    Feel free to share some of your own and comment on others!
+  </p>
+  <a
+    href="/campgrounds"
+    class="btn btn-lg btn-secondary fw-bold border-white bg-white"
+  >
+    View Camps
+  </a>
+</main>
+
+<footer class="mt-auto text-white-50">
+  <p>
+    <p>YelpCamp &copy; 2021 </p>
+  </p>
+</footer>

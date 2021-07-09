@@ -3,10 +3,10 @@ var map = new mapboxgl.Map({
   container: 'map', // container ID
   // style: 'mapbox://styles/mapbox/streets-v11', // Street Style
   // style: 'mapbox://styles/mapbox/outdoors-v11', // Street Style
-  style: 'mapbox://styles/mapbox/light-v10', // Light Style
-  // style: 'mapbox://styles/mapbox/dark-v10', // Dark Style
+  // style: 'mapbox://styles/mapbox/light-v10', // Light Style
+  style: 'mapbox://styles/mapbox/dark-v10', // Dark Style
   center: campgroundData.geometry.coordinates,
-  zoom: 8 // starting zoom
+  zoom: 9 // starting zoom
 })
 
 var size = 100
@@ -40,13 +40,13 @@ var pulsingDot = {
     context.clearRect(0, 0, this.width, this.height)
     context.beginPath()
     context.arc(this.width / 2, this.height / 2, outerRadius, 0, Math.PI * 2)
-    context.fillStyle = 'rgba(255, 200, 200,' + (1 - t) + ')'
+    context.fillStyle = 'rgba(25, 68, 147,' + (1 - t) + ')'
     context.fill()
 
     // Draw the inner circle.
     context.beginPath()
     context.arc(this.width / 2, this.height / 2, radius, 0, Math.PI * 2)
-    context.fillStyle = 'rgba(255, 100, 100, 1)'
+    context.fillStyle = 'rgba(25, 68, 147, 1)'
     context.strokeStyle = 'white'
     context.lineWidth = 2 + 4 * (1 - t)
     context.fill()
@@ -100,4 +100,7 @@ map.on('load', function () {
       )
       .addTo(map)
   })
+
+  // Add zoom and rotation controls to the map.
+  map.addControl(new mapboxgl.NavigationControl())
 })

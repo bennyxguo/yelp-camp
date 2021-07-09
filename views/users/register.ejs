@@ -1,46 +1,56 @@
-<% layout('layouts/boilerplate') %>
-<div class="row">
-  <div class="col-6 offset-3">
-    <h1 class="mb-4">Register</h1>
-    <form action="/register" method="POST" class="validated-form" novalidate>
-      <div class="form-floating mb-3">
-        <input
-          class="form-control"
-          type="text"
-          id="username"
-          name="username"
-          placeholder="Username"
-          required
-        />
-        <label class="form-label" for="username">Username</label>
-        <div class="valid-feedback">Looks good!</div>
+<% layout('layouts/cover-layout') %>
+
+<link rel="stylesheet" href="/css/signin.css" />
+
+<div class="form-signin">
+  <%- include('../partials/flash')%>
+  <form action="/register" method="POST" class="validated-form" novalidate>
+    <h1 class="logo">⛺️</h1>
+    <h2 class="h3 mb-3 fw-normal">Register an account</h2>
+    <div class="form-floating mb-3">
+      <input
+        class="form-control text-white"
+        type="text"
+        id="username"
+        name="username"
+        placeholder="Username"
+        required
+      />
+      <label class="form-label" for="username">Username</label>
+      <div class="valid-feedback">Looks good!</div>
+    </div>
+    <div class="form-floating mb-3">
+      <input
+        class="form-control text-white"
+        type="text"
+        id="email"
+        name="email"
+        placeholder="email"
+        required
+      />
+      <label class="form-label" for="email">Email</label>
+      <div class="valid-feedback">Looks good!</div>
+    </div>
+    <div class="form-floating mb-3">
+      <input
+        class="form-control text-white"
+        type="password"
+        id="password"
+        name="password"
+        placeholder="password"
+        required
+      />
+      <label class="form-label" for="password">Password</label>
+      <div class="valid-feedback">Looks good!</div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <button class="w-100 btn btn-primary">Register</button>
       </div>
-      <div class="form-floating mb-3">
-        <input
-          class="form-control"
-          type="text"
-          id="email"
-          name="email"
-          placeholder="email"
-          required
-        />
-        <label class="form-label" for="email">Email</label>
-        <div class="valid-feedback">Looks good!</div>
+      <div class="col-6">
+        <a type="button" class="w-100 btn btn-light" href="/login"> Login </a>
       </div>
-      <div class="form-floating mb-3">
-        <input
-          class="form-control"
-          type="password"
-          id="password"
-          name="password"
-          placeholder="password"
-          required
-        />
-        <label class="form-label" for="password">Password</label>
-        <div class="valid-feedback">Looks good!</div>
-      </div>
-      <button class="btn btn-primary">Register</button>
-      <a type="button" class="btn btn-light" href="/login">Login</a>
-    </form>
-  </div>
+    </div>
+    <p class="mt-5 mb-3 text-muted">YelpCamp &copy; 2021</p>
+  </form>
 </div>
