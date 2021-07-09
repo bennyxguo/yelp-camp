@@ -5,13 +5,13 @@
   <div class="col">
     <div class="card h-100">
       <img
-        src="<%= campground.image %>"
+        src="<%= campground.images[0].url %>"
         class="card-img-top"
         alt="..."
         height="250"
       />
       <div class="card-body">
-        <h5 class="card-title"><%= campground.title %></h5>
+        <h5 class="card-title text-primary"><%= campground.title %></h5>
         <p class="card-text"><%= campground.description %></p>
         <p class="card-text text-muted">
           <i class="bi bi-geo-alt"></i>
