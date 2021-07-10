@@ -1,10 +1,18 @@
+// Under Development Mode
+// Add env configs into the process.env variable
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
+
 const mongoose = require('mongoose')
 const Campground = require('../models/campground')
 const User = require('../models/user')
 const cities = require('./cities')
 const { places, descriptors } = require('./seedHelpers')
 
-mongoose.connect('mongodb://localhost:27017/yelp-camp', {
+const mongodbUrl = process.env.MONGO_DB || 'mongodb://localhost:27017/yelp-camp'
+
+mongoose.connect(mongodbUrl, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useUnifiedTopology: true
