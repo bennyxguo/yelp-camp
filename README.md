@@ -28,6 +28,7 @@
 - `mongoose` - MongoDB framework for Express
 - `morgan` - HTTP request logger middleware for Node.js
 - `express-session` - Simple session middleware for Express
+  - `connect-mongo` - MongoDB session store for Connect and Express written in Typescript.
 - `connect-flash` - A special area of the session used for storing messages.
 - `dotenv` - Dotenv is a zero-dependency module that loads environment variables from a .env file into process.env.
 - `Passport` - Passport is Express-compatible authentication middleware for Node.js.

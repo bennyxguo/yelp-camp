@@ -9,8 +9,11 @@ const path = require('path')
 const mongoose = require('mongoose')
 const morgan = require('morgan')
 const ejsMate = require('ejs-mate')
+
 const session = require('express-session')
+const MongoStore = require('connect-mongo')
 const flash = require('connect-flash')
+
 const passport = require('passport')
 const mongoSanitize = require('express-mongo-sanitize')
 const helmet = require('helmet')
@@ -25,7 +28,9 @@ const campgroundsRoutes = require('./routes/campgrounds')
 const reviewsRoutes = require('./routes/reviews')
 const usersRoutes = require('./routes/users')
 
-mongoose.connect('mongodb://localhost:27017/yelp-camp', {
+const mongodbUrl = process.env.MONGO_DB || 'mongodb://localhost:27017/yelp-camp'
+
+mongoose.connect(mongodbUrl, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useUnifiedTopology: true,
@@ -102,16 +107,27 @@ app.use(
   })
 )
 
+const secret = process.env.SECRET || 'this_should_be_a_better_secret'
+const store = MongoStore.create({
+  mongoUrl: mongodbUrl,
+  touchAfter: 24 * 3600 // time period in seconds
+})
+
+store.on('error', function (e) {
+  console.log('SESSION STORE ERROR', e)
+})
+
 const sessionConfig = {
   name: '__ycs', // Custom session id.
-  secret: 'this_should_be_a_better_secret!',
+  secret: secret,
   resave: false,
   saveUninitialized: true,
   cookie: {
     httpOnly: true,
     expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
     maxAge: 1000 * 60 * 60 * 24 * 7
-  }
+  },
+  store
 }
 app.use(session(sessionConfig))
 app.use(flash())
