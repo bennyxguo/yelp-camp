@@ -29,6 +29,14 @@
 - `morgan` - HTTP request logger middleware for Node.js
 - `express-session` - Simple session middleware for Express
 - `connect-flash` - A special area of the session used for storing messages.
+- `dotenv` - Dotenv is a zero-dependency module that loads environment variables from a .env file into process.env.
+- `Passport` - Passport is Express-compatible authentication middleware for Node.js.
+  - `passport-local` - Passport strategy for authenticating with a username and password.
+  - `passport-local-mongoose` - Passport-Local Mongoose is a Mongoose plugin that simplifies building username and password login with Passport.
+- `multer` - Multer is a node.js middleware for handling multipart/form-data, which is primarily used for uploading files.
+  - `multer-storage-cloudinary` - A multer storage engine for Cloudinary.
+- `express-mongo-sanitize` - Express 4.x middleware which sanitizes user-supplied data to prevent MongoDB Operator Injection.
+- `sanitize-html` - sanitize-html provides a simple HTML sanitizer with a clear API.
 
 ## Features
 
