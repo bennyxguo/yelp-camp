@@ -37,6 +37,7 @@
   - `multer-storage-cloudinary` - A multer storage engine for Cloudinary.
 - `express-mongo-sanitize` - Express 4.x middleware which sanitizes user-supplied data to prevent MongoDB Operator Injection.
 - `sanitize-html` - sanitize-html provides a simple HTML sanitizer with a clear API.
+- `helmet` - Helmet helps you secure your Express apps by setting various HTTP headers.
 
 ## Features
 

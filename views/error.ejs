@@ -17,6 +17,8 @@
     </svg>
     <%= err.message %>
   </h4>
+  <% if (process.env.NODE_ENV !== 'production') { %>
   <hr />
   <p class="mb-0"><%= err.stack %></p>
+  <% } %>
 </div>
