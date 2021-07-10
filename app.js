@@ -12,6 +12,7 @@ const ejsMate = require('ejs-mate')
 const session = require('express-session')
 const flash = require('connect-flash')
 const passport = require('passport')
+const mongoSanitize = require('express-mongo-sanitize')
 
 const LocalStrategy = require('passport-local')
 const User = require('./models/user')
@@ -48,6 +49,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 app.use(morgan('dev'))
 app.use(express.static('public')) // Adding public resources
+app.use(mongoSanitize()) // Prevent mongo operator injection
 
 const sessionConfig = {
   secret: 'this_should_be_a_better_secret!',

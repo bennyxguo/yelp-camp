@@ -1,9 +1,6 @@
 mapboxgl.accessToken = mapBoxToken
 var map = new mapboxgl.Map({
   container: 'map', // container ID
-  // style: 'mapbox://styles/mapbox/streets-v11', // Street Style
-  // style: 'mapbox://styles/mapbox/outdoors-v11', // Street Style
-  // style: 'mapbox://styles/mapbox/light-v10', // Light Style
   style: 'mapbox://styles/mapbox/dark-v10', // Dark Style
   center: campgroundData.geometry.coordinates,
   zoom: 9 // starting zoom
